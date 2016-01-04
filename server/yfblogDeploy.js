@@ -46,7 +46,7 @@ http.createServer(function(req, res) {
             if(req.route.path === '/blog'){
 
                 if(req.body){
-
+                    console.log(req.body.repository)
                     console.log(req.body.repository.name);
                     console.log(req.body.repository.owner.login);
 
