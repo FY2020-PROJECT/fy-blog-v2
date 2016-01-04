@@ -19,7 +19,7 @@ cd ${repo_path}
 rm -rf ${repo_path}/${username}/
 git clone https://github.com/${username}/${repo_name}.git ${username}/${repo_name}
 
-cd ${repo_path}/${username}/${repo_name}
+cd ${repo_path}/${username}/${repo_name}/content
 for i in `find * -type f`
 do
 mv -f $i `echo ${i%.*}-${username}.${i##*.}`;
@@ -30,6 +30,8 @@ cd ${root_path}
 git pull origin master
 
 #copy
+echo "copy from ${repo_path}/${username}/${repo_name}/content to ${root_path}/content/"
+
 cp -rf ${repo_path}/${username}/${repo_name}/content/ ${root_path}/content/
 ${root_path}/deploy.sh "${username}/${repo_name} auto rebuilt site at `date`"
 
