@@ -3,6 +3,7 @@
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
+rm -rf public/
 # Build the project.
 hugo -D # if using a theme, replace by `hugo -t <yourtheme>`
 
