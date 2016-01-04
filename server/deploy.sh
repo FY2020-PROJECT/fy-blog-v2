@@ -21,7 +21,7 @@ git clone https://github.com/dsgygb/blog-hugo.git ${username}
 
 cp -rf ${repo_path}/${username}/content/ ${root_dir}/content/
 
-. ${root_dir}/deploy.sh
+${root_dir}/deploy.sh
 
 
 
