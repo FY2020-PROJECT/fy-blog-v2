@@ -31,7 +31,7 @@ git pull origin master
 
 #copy
 cp -rf ${repo_path}/${username}/${repo_name}/content/ ${root_path}/content/
-${root_path}/deploy.sh "${username}/${repo_name} rebuilt site at `date`"
+${root_path}/deploy.sh "${username}/${repo_name} auto rebuilt site at `date`"
 
 echo -e "\033[0;32m success! \033[0m"
 
