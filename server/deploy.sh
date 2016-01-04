@@ -1,8 +1,8 @@
 #! /bin/bash
 
-if [ $# -eq 1 ]
-  then username="$1"
-  else echo -e "\033[31m miss param:please input param 1 for github username \033[0m";exit 1
+if [ $# -eq 2 ]
+  then username="$1"; repo_name="$2";
+  else echo -e "\033[31m miss param:please input 2 params  for github username and repository,like ./deploy.sh dsgygb blog-hugo \033[0m";exit 1
 fi
 
 root_path=$(cd "$(dirname "$0")/../"; pwd)
@@ -17,12 +17,20 @@ fi
 cd ${repo_path}
 
 rm -rf ${repo_path}/${username}/
-git clone https://github.com/dsgygb/blog-hugo.git ${username}
+git clone https://github.com/${username}/${repo_name}.git ${username}/${repo_name}
 
-cp -rf ${repo_path}/${username}/content/ ${root_path}/content/
+cd ${repo_path}/${username}/${repo_name}
+for i in `find * -type f`
+do
+mv -f $i `echo ${i%.*}-${username}.${i##*.}`;
+done
+
 
 cd ${root_path}
+git pull origin master
 
+#copy
+cp -rf ${repo_path}/${username}/${repo_name}/content/ ${root_path}/content/
 ${root_path}/deploy.sh
 
 echo -e "\033[0;32m success! \033[0m"
