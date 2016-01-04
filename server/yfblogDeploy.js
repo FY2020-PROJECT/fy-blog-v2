@@ -55,7 +55,7 @@ http.createServer(function(req, res) {
 
                     console.log(username+'/'+repo_name+' git push event'+new Date());
                     var spawn = require('child_process').spawn,
-                        deploy = spawn('sh', [ './deploy.sh' ]);
+                        deploy = spawn('sh', [ './deploy.sh '+username+' '+repo_name ]);
                     deploy.stdout.on('data', function (data) {
                         console.log(''+data);
                     });
