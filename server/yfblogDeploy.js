@@ -48,23 +48,24 @@ http.createServer(function(req, res) {
                 if(req.body){
                     console.log(req.body.repository)
                     console.log(req.body.repository.name);
-                    console.log(req.body.repository.owner.login);
+                    console.log(req.body.repository.owner.name);
+                    var username = req.body.repository.owner.name;
+                    var repo_name = req.body.repository.name;
 
-                    //
-                    //
-                    //console.log('git push event'+new Date());
-                    //var spawn = require('child_process').spawn,
-                    //    deploy = spawn('sh', [ './deploy.sh' ]);
-                    //deploy.stdout.on('data', function (data) {
-                    //    console.log(''+data);
-                    //});
-                    //
-                    //deploy.on('error',function(err){
-                    //    console.log(err);
-                    //});
-                    //deploy.on('close', function (code) {
-                    //    console.log('Child process exited with code ' + code);
-                    //});
+
+                    console.log(username+'/'+repo_name+' git push event'+new Date());
+                    var spawn = require('child_process').spawn,
+                        deploy = spawn('sh', [ './deploy.sh' ]);
+                    deploy.stdout.on('data', function (data) {
+                        console.log(''+data);
+                    });
+
+                    deploy.on('error',function(err){
+                        console.log(err);
+                    });
+                    deploy.on('close', function (code) {
+                        console.log('Child process exited with code ' + code);
+                    });
                     res.writeHead(200, "OK", {'Content-Type': 'application/json'});
                     res.end(JSON.stringify( {message: 'Github Hook received!'}));
 
