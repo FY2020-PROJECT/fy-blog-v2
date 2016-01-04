@@ -47,7 +47,8 @@ http.createServer(function(req, res) {
 
                 if(req.body){
 
-                    console.log(req.body);
+                    console.log(req.body.repository.name);
+                    console.log(req.body.repository.owner.login);
 
                     //
                     //
@@ -87,3 +88,5 @@ http.createServer(function(req, res) {
 }).listen(8112,function(){
     console.log('listen 8112');
 });
+
+
