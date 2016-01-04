@@ -2,12 +2,12 @@
 
 if [ $# -eq 1 ]
   then username="$1"
-  else echo "pleace input param 1 for github username";exit 1
+  else echo -e "\033[31m miss param:please input param 1 for github username \033[0m";exit 1
 fi
 
-root_dir=$(cd "$(dirname "$0")/../"; pwd)
-cur_dir=$(cd "$(dirname "$0")"; pwd)
-repo_path=${cur_dir}/repository
+root_path=$(cd "$(dirname "$0")/../"; pwd)
+cur_path=$(cd "$(dirname "$0")"; pwd)
+repo_path=${cur_path}/repository
 
 if [ ! -d "$repo_path" ]
 then
@@ -19,29 +19,15 @@ cd ${repo_path}
 rm -rf ${repo_path}/${username}/
 git clone https://github.com/dsgygb/blog-hugo.git ${username}
 
-cp -rf ${repo_path}/${username}/content/ ${root_dir}/content/
+cp -rf ${repo_path}/${username}/content/ ${root_path}/content/
 
-${root_dir}/deploy.sh
+cd ${root_path}
 
+${root_path}/deploy.sh
 
+echo -e "\033[0;32m success! \033[0m"
 
-
-#
-#cd repository
-#
-##echo ${username}
-#
-#git clone https://github.com/dsgygb/blog-hugo.git ${username}
-#
-#cd ${username}
-#
-#git pull
-#
-#cp -r -f ../../repository/${username}/content/ ../../../content/
-#
-#cd ../../../
-#
-#./deploy.sh
+exit 1;
 
 
 
